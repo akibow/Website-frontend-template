@@ -1,0 +1,33 @@
+head
+	meta(charset="UTF-8")
+	meta(name="viewport", content="width=device-width")
+	meta(name="format-detection" content="telephone=no")
+	meta(property="og:site_name", content="ENTER_SITE_NAME")
+	if title && title != ''
+		title=title + ' | ENTER_SITE_NAME'
+		meta(property="og:title", content=title)
+	else
+		title ENTER_SITE_NAME
+		meta(property="og:title", content="ENTER_SITE_NAME")
+	if image && image != ''
+		meta(property="og:image", content="http://ENTER_DOMAIN.com" + image)
+	else
+		meta(property="og:image", content="http://ENTER_DOMAIN.com/images/ogimage.jpg")
+	if disc && disc != ''
+		meta(property="og:description", content=disc)
+		meta(name="description", content=disc)
+	else
+		meta(property="og:description", content="ENTER_DISCRIPTION")
+		meta(name="description", content="ENTER_DISCRIPTION")
+	if url && url != ''
+		meta(property="og:url", content="http://ENTER_DOMAIN.com" + url)
+		link(rel="canonical", href="http://ENTER_DOMAIN.com" + url)
+	else
+		meta(property="og:url", content="http://ENTER_DOMAIN.com/")
+		link(rel="canonical", href="http://ENTER_DOMAIN.com/")
+	meta(property="og:type", content="article")
+	link(rel="shortcut icon", href="/favicon.ico")
+	//[if lt IE 9]><script src="/js/html5shiv.js"></script><script src="/js/IE9.js"></script><![endif]
+	link(rel="stylesheet", media="all", href="/css/main.min.css")
+	if css && css != ''
+		link(rel="stylesheet", media="all", href=css)

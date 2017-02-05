@@ -1,0 +1,60 @@
+@charset "utf-8";
+@import "reset";
+@import "mixin";
+
+
+/* basics */
+body{
+	background-color: #fff;
+	font-size: 16px;
+	line-height: 1.6;
+	@include sans;
+	text-align: justify;
+	letter-spacing: $letter-spacing +em;
+	color: #000;
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+a{
+	@include translucent;
+	text-decoration: underline;
+	outline: 0;
+}
+
+.indent,
+.indentList li{
+	@include indent;
+}
+
+.section{
+	@extend %section;
+}
+
+.content{
+	@extend %content;
+}
+
+
+/* rayout */
+#main-header{
+}
+
+#main-nav{
+}
+
+#main-footer{
+}
+
+
+/* content */
+
+/* home */
+//@import "home";
+
+
+/* responsive */
+@media (min-width: 950px){
+	
+}

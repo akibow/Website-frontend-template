@@ -1,0 +1,103 @@
+// color
+$c_red: #f00;
+$c_green: #0f0;
+$c_blue: #00f;
+
+// font & text
+$letter-spacing: 0.05;
+
+@mixin sans{
+	font-family: "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "Noto Sans Japanese", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+}
+
+@mixin serif{
+	font-family: "游明朝", "Yu Mincho", "游明朝体", "YuMincho", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "ＭＳ Ｐ明朝","MS PMincho", serif;
+}
+
+// basics
+$content-width: 1000;
+
+%clrfx{
+	&:after{
+		content:"";
+		display: table;
+		clear: both;
+	}
+}
+
+$vender-prefix: '-webkit-','-moz-','-ms-','-o-','';
+@mixin vprefix($prop, $value){
+	@each $prefix in $vender-prefix{
+		#{$prefix}#{$prop}: $value;
+	}
+}
+
+@mixin transition($prop:opacity, $dur:0.3s, $ease:linear){
+	@include vprefix(transition-property, $prop);
+	@include vprefix(transition-duration, $dur);
+	@include vprefix(transition-timing-function, $ease);
+}
+
+%section{
+	width: 100%;
+	max-width: $content-width+px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+%content{
+	padding-left: 25/$content-width*100+%;
+	padding-right: 25/$content-width*100+%;
+}
+
+%flex{
+	@include vprefix(display, flex);
+}
+
+//%column2{
+//	@extend %clrfx;
+//	.colL{
+//		float: left;
+//	}
+//	.colR{
+//		float: right;
+//	}
+//}
+
+%vwrite{
+	-ms-writing-mode: tb-rl;
+	-webkit-writing-mode: vertical-rl;
+	writing-mode: vertical-rl;
+}
+
+
+// snipets
+@mixin indent{
+	text-indent: -$letter-spacing - 1 +em;
+	margin-left: $letter-spacing + 1 +em;
+}
+
+@mixin translucent{
+	@include transition;
+	opacity: 1;
+	&:hover{
+		opacity: 0.6;
+	}
+}
+
+@mixin disolve{
+	position: relative;
+	.disolveImg{
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		@include transition($dur:0.6s);
+		opacity: 0;
+	}
+	&:hover{
+		.disolveImg{
+			opacity: 1;
+		}
+	}
+}
