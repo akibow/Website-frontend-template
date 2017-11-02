@@ -7,7 +7,7 @@ $c_blue: #00f;
 $letter-spacing: 0.05;
 
 @mixin sans{
-	font-family: "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "Noto Sans Japanese", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+	font-family: "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "Noto Sans Japanese", Hiragino Sans, "ヒラギノ角ゴシック", "メイリオ", Meiryo, sans-serif;
 }
 
 @mixin serif{
@@ -52,6 +52,8 @@ $vender-prefix: '-webkit-','-moz-','-ms-','-o-','';
 
 %flex{
 	@include vprefix(display, flex);
+	@include vprefix(flex-wrap, wrap);
+	@include vprefix(justify-content, space-between);
 }
 
 //%column2{
