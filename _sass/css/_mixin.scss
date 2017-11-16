@@ -17,7 +17,7 @@ $letter-spacing: 0.05;
 // basics
 $content-width: 1000;
 
-%clrfx{
+@mixin clrfx{
 	&:after{
 		content:"";
 		display: table;
@@ -38,19 +38,19 @@ $vender-prefix: '-webkit-','-moz-','-ms-','-o-','';
 	@include vprefix(transition-timing-function, $ease);
 }
 
-%section{
+@mixin section{
 	width: 100%;
 	max-width: $content-width+px;
 	margin-right: auto;
 	margin-left: auto;
 }
 
-%content{
+@mixin content{
 	padding-left: 25/$content-width*100+%;
 	padding-right: 25/$content-width*100+%;
 }
 
-%flex{
+@mixin flex{
 	@include vprefix(display, flex);
 	@include vprefix(flex-wrap, wrap);
 	@include vprefix(justify-content, space-between);
@@ -66,7 +66,7 @@ $vender-prefix: '-webkit-','-moz-','-ms-','-o-','';
 //	}
 //}
 
-%vwrite{
+@mixin vwrite{
 	-ms-writing-mode: tb-rl;
 	-webkit-writing-mode: vertical-rl;
 	writing-mode: vertical-rl;
