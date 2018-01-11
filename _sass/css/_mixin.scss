@@ -40,7 +40,7 @@ $vender-prefix: '-webkit-','-moz-','-ms-','-o-','';
 
 @mixin section{
 	width: 100%;
-	max-width: $content-width+px;
+	max-width: -50+$content-width+px;
 	margin-right: auto;
 	margin-left: auto;
 }
