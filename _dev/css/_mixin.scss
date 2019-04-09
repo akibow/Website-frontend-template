@@ -1,7 +1,10 @@
+// imagepath
+$img: '/images/';
+
 // color
-$c_red: #f00;
-$c_green: #0f0;
-$c_blue: #00f;
+$c-red: #f00;
+$c-green: #0f0;
+$c-blue: #00f;
 
 // font & text
 $letter-spacing: 0.05;
@@ -15,7 +18,13 @@ $letter-spacing: 0.05;
 }
 
 // basics
-$content-width: 1000;
+$content-maxwidth: 1000;
+
+@mixin mq-pc{
+	@media (min-width: 737px){
+		@content;
+	}
+}
 
 @mixin clrfx{
 	&:after{
@@ -25,38 +34,27 @@ $content-width: 1000;
 	}
 }
 
-$vender-prefix: '-webkit-','-moz-','-ms-','-o-','';
-@mixin vprefix($prop, $value){
-	@each $prefix in $vender-prefix{
+$vender-prefix: '-webkit-','-moz-','-ms-','';
+$transition-prefix: '-webkit-','';
+@mixin vprefix($prop, $value, $pre: $vender-prefix ){
+	@each $prefix in $pre{
 		#{$prefix}#{$prop}: $value;
 	}
 }
 
-@mixin transition($prop:opacity, $dur:0.3s, $ease:linear){
-	@include vprefix(transition-property, $prop);
-	@include vprefix(transition-duration, $dur);
-	@include vprefix(transition-timing-function, $ease);
-}
-
-@mixin section{
-	width: 100%;
-	max-width: -50+$content-width+px;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-@mixin content{
-	padding-left: 25/$content-width*100+%;
-	padding-right: 25/$content-width*100+%;
-}
-
-@mixin flex{
-	@include vprefix(display, flex);
-	@include vprefix(flex-wrap, wrap);
-	@include vprefix(justify-content, space-between);
-}
-
-//%column2{
+//@mixin transition($prop:opacity, $dur:0.3s, $ease:linear){
+//	@include vprefix(transition-property, $prop, $transition-prefix);
+//	@include vprefix(transition-duration, $dur, $transition-prefix);
+//	@include vprefix(transition-timing-function, $ease, $transition-prefix);
+//}
+//
+//@mixin flex{
+//	@include vprefix(display, flex);
+//	@include vprefix(flex-wrap, wrap);
+//	@include vprefix(justify-content, space-between);
+//}
+//
+//@mixin column2{
 //	@extend %clrfx;
 //	.colL{
 //		float: left;
@@ -65,12 +63,12 @@ $vender-prefix: '-webkit-','-moz-','-ms-','-o-','';
 //		float: right;
 //	}
 //}
-
-@mixin vwrite{
-	-ms-writing-mode: tb-rl;
-	-webkit-writing-mode: vertical-rl;
-	writing-mode: vertical-rl;
-}
+//
+//@mixin vwrite{
+//	-ms-writing-mode: tb-rl;
+//	-webkit-writing-mode: vertical-rl;
+//	writing-mode: vertical-rl;
+//}
 
 
 // snipets
@@ -80,7 +78,7 @@ $vender-prefix: '-webkit-','-moz-','-ms-','-o-','';
 }
 
 @mixin translucent{
-	@include transition;
+	transition: opacity 0.3s linear;
 	opacity: 1;
 	&:hover{
 		opacity: 0.6;
@@ -94,7 +92,7 @@ $vender-prefix: '-webkit-','-moz-','-ms-','-o-','';
 		position: absolute;
 		top: 0;
 		left: 0;
-		@include transition($dur:0.6s);
+		transition: opacity 0.6s linear;
 		opacity: 0;
 	}
 	&:hover{

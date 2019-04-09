@@ -1,0 +1,87 @@
+@charset "utf-8";
+
+/* --------------------
+Foundation
+---------------------*/
+@import "reset";
+@import "mixin";
+
+
+/* basics */
+html {
+	font-size: 62.5%;
+}
+
+body{
+	background-color: #fff;
+	font-size: 1.6rem;
+	line-height: 1.6;
+	@include sans;
+	letter-spacing: $letter-spacing +em;
+	color: #000;
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+a{
+	@include translucent;
+	text-decoration: underline;
+	outline: 0;
+	-webkit-tap-highlight-color: transparent;
+	tap-highlight-color: transparent;
+}
+
+img {
+	width: 100%;
+	max-width: 100%;
+	vertical-align: top;
+}
+
+p{
+	text-align: justify;
+	text-align-last: left;
+}
+
+
+/* --------------------
+Compornents
+---------------------*/
+//@import "compornents";
+
+/* --------------------
+Layout
+---------------------*/
+//@import "layout";
+
+/* --------------------
+Utility
+---------------------*/
+.u-clrfx {
+	@include clrfx;
+}
+
+.u-hide {
+	display: none;
+}
+
+.u-pcbr {
+	display: none;
+	@include mq-pc {
+		display: inline-block;
+	}
+}
+
+.u-spbr {
+	@include mq-pc {
+		display: none;
+	}
+}
+
+.u-txt-bold {
+	font-weight: bold;
+}
+
+/* --------------------
+Responsive
+---------------------*/
