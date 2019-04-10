@@ -18,23 +18,19 @@ body{
 	line-height: 1.6;
 	@include sans;
 	letter-spacing: $letter-spacing +em;
-	color: #000;
+	color: $c-txt;
 	-webkit-text-size-adjust: 100%;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
 a{
-	@include translucent;
-	text-decoration: underline;
 	outline: 0;
-	-webkit-tap-highlight-color: transparent;
-	tap-highlight-color: transparent;
+	color: $c-link;
 }
 
 img {
 	width: 100%;
-	max-width: 100%;
 	vertical-align: top;
 }
 

@@ -2,12 +2,23 @@
 $img: '/images/';
 
 // color
+$c-txt: #333;
+$c-link: #00f;
 $c-red: #f00;
 $c-green: #0f0;
 $c-blue: #00f;
 
 // font & text
 $letter-spacing: 0.05;
+
+// line height
+$lh-sm: 1.4;
+$lh-md: 1.6;
+
+// font weight
+$fw-lig: 300; // light
+$fw-reg: 400; // regular
+$fw-med: 500; // medium
 
 @mixin sans{
 	font-family: "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "Noto Sans Japanese", Hiragino Sans, "ヒラギノ角ゴシック", "メイリオ", Meiryo, sans-serif;
@@ -17,16 +28,75 @@ $letter-spacing: 0.05;
 	font-family: "游明朝", "Yu Mincho", "游明朝体", "YuMincho", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "ＭＳ Ｐ明朝","MS PMincho", serif;
 }
 
-// basics
-$content-maxwidth: 1000;
+/* ----------
+	basics
+---------- */
 
-@mixin mq-pc{
-	@media (min-width: 737px){
+$content-maxwidth: 1200;
+$hover-setting: .2s linear;
+
+// PCビューへの切り替え（通常のブレイクポイント）
+@mixin mq-pc {
+	@media (min-width: 768px){
 		@content;
 	}
 }
 
-@mixin clrfx{
+// SPビュー専用スタイルのmedia query
+@mixin mq-sp {
+	@media (max-width: 767px){
+		@content;
+	}
+}
+
+// 規定の両端スペースを備えたwrapper用
+// $max-widthで最大幅を設定
+@mixin single-wrapper($max-width: $content-maxwidth) {
+	width: percentage(335/375);
+	max-width: $max-width +px;
+	margin-left: auto;
+	margin-right: auto;
+	@include mq-pc {
+		width: 100%;
+		max-width: ($max-width + 40) +px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+
+// マルチカラム設定用
+// 行が増えると左寄せ
+//$col: カラム数
+//$item: 子要素のセレクタ
+//$mb: 下マージン
+@mixin multiple-column($col, $item, $mb:40px) {
+	margin-left: percentage(-40/1200);
+	
+	#{$item} {
+		width: percentage(1/$col) - percentage(40/1200);
+		max-width: percentage(1/$col) - percentage(40/1200);
+		flex: 0 1 ( percentage(1/$col) - percentage(40/1200) );
+		margin-left: percentage(40/1200);
+		margin-bottom: $mb;
+		&:nth-child(#{$col}n+1):nth-last-child(-n+#{$col}),
+		&:nth-child(#{$col}n+1):nth-last-child(-n+#{$col}) ~ #{$item} {
+			margin-bottom: 0;
+		}
+	}
+}
+
+/* ----------
+	snipets
+---------- */
+
+@mixin flex {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@mixin clrfx {
 	&:after{
 		content:"";
 		display: table;
@@ -34,70 +104,15 @@ $content-maxwidth: 1000;
 	}
 }
 
-$vender-prefix: '-webkit-','-moz-','-ms-','';
-$transition-prefix: '-webkit-','';
-@mixin vprefix($prop, $value, $pre: $vender-prefix ){
-	@each $prefix in $pre{
-		#{$prefix}#{$prop}: $value;
-	}
-}
-
-//@mixin transition($prop:opacity, $dur:0.3s, $ease:linear){
-//	@include vprefix(transition-property, $prop, $transition-prefix);
-//	@include vprefix(transition-duration, $dur, $transition-prefix);
-//	@include vprefix(transition-timing-function, $ease, $transition-prefix);
-//}
-//
-//@mixin flex{
-//	@include vprefix(display, flex);
-//	@include vprefix(flex-wrap, wrap);
-//	@include vprefix(justify-content, space-between);
-//}
-//
-//@mixin column2{
-//	@extend %clrfx;
-//	.colL{
-//		float: left;
-//	}
-//	.colR{
-//		float: right;
-//	}
-//}
-//
-//@mixin vwrite{
-//	-ms-writing-mode: tb-rl;
-//	-webkit-writing-mode: vertical-rl;
-//	writing-mode: vertical-rl;
-//}
-
-
-// snipets
 @mixin indent{
 	text-indent: -$letter-spacing - 1 +em;
 	margin-left: $letter-spacing + 1 +em;
 }
 
-@mixin translucent{
-	transition: opacity 0.3s linear;
-	opacity: 1;
-	&:hover{
-		opacity: 0.6;
-	}
-}
-
-@mixin disolve{
-	position: relative;
-	.disolveImg{
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 0;
-		transition: opacity 0.6s linear;
-		opacity: 0;
-	}
-	&:hover{
-		.disolveImg{
-			opacity: 1;
-		}
+// テキストホバー設定
+@mixin txthov {
+	&:hover {
+		text-decoration: underline;
+		color: $c-key;
 	}
 }
